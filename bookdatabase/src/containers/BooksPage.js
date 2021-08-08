@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
 import BooksPage from "../components/BooksPage";
-import { loadBooks } from "../redux/actions/bookActions";
+import { loadBooks } from "../redux/action/bookActions";
 
 function mapStateToProps(state) {
   return {
-    books: state.books,
+    loading: state.books.loading,
+    books: state.books.books,
+    error: state.books.error
   };
 }
 

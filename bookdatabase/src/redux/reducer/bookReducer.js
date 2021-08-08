@@ -1,12 +1,33 @@
-import * as ActionTypes from "../actions/actionTypes";
+import * as ActionTypes from "../action/actionTypes";
+import storeState from '../state';
 
-export default function bookReducer(state = [], action) {
-  switch (action.type) {
+
+const books = (state = storeState.books, action) => {
+  switch(action.type){
+    case ActionTypes.LOAD_BOOKS_BEGIN:
+      return {
+        ...state,
+        loading: !state.loading,
+        error: null,
+        books: []
+      }
+
     case ActionTypes.LOAD_BOOKS_SUCCESS:
-      return action.books;
-    case ActionTypes.CREATE_BOOKS:
-      return [...state, action.book];
+      return {
+        ...state,
+        loading: !state.loading,
+        books: action.value
+      }
+    case ActionTypes.LOAD_BOOKS_FAILURE:
+      return {
+        ...state,
+        loading: !state.loading,
+        error: action.value,
+        books: []
+      }
     default:
-      return state;
+      return {...state}
   }
 }
+
+export default books;

@@ -23,7 +23,7 @@ function BookPage(props) {
     if (props.books.length === 0) {
       props.loadBooks();
     }
-  }, []);
+  }, [props]);
 
   return (
     <TableContainer className={classes.paper} component={Paper}>

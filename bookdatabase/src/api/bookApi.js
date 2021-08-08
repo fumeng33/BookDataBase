@@ -17,6 +17,7 @@ export function createBook(book) {
 }
 
 export function deleteBook(bookId) {
+  //`${bookUrl}/${bookId}` - string interpolation
   return fetch(bookUrl + bookId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
