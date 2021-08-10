@@ -1,5 +1,6 @@
 import * as ActionTypes from "./actionTypes";
 import * as bookApi from "../../api/bookApi";
+import axios from "axios";
 
 const mockBooks = [
   {
@@ -34,22 +35,22 @@ const mockBooks = [
   }
 ]
 
-export const getBooks =() => async dispatch => {
-  try {
-    const res = await axios.get('/books')
-    dispatch({
-      type: ActionTypes.LOAD_BOOKS_BEGIN,
-      payload:res.data
-    })
-  } 
-  catch (err) {
-    dispatch({
-      type: ActionTypes.LOAD_BOOKS_FAILURE,
-      payload: {msg: err.response.statusText, status: err.response.status} 
-    })
+// export const getBooks =() => async dispatch => {
+//   try {
+//     const res = await axios.get('/books')
+//     dispatch({
+//       type: ActionTypes.LOAD_BOOKS_BEGIN,
+//       payload:res.data
+//     })
+//   } 
+//   catch (err) {
+//     dispatch({
+//       type: ActionTypes.LOAD_BOOKS_FAILURE,
+//       payload: {msg: err.response.statusText, status: err.response.status} 
+//     })
     
-  }
-}
+//   }
+// }
 
 export const loadBooksBegin = () => {
   return {
@@ -74,17 +75,14 @@ const loadBooksFailure = (error) => {
 export const loadBooks = () => {
   return dispatch => {
     dispatch(loadBooksBegin())
-    // setTimeout(() => {
-    //   dispatch(loadBooksSuccess(mockBooks))
-    // }, 2000)
-    return fetch('http://localhost:3001/books')
+    return axios.get('/books')
     .then(res => {
-      console.log("RESPONSE:", res)
-      dispatch(loadBooksSuccess(mockBooks))
+      console.log("RESPONSE:", res.data)
+      dispatch(loadBooksSuccess(res.data))
     })
     .catch(error => {
       console.log("ERROR:", error)
-      dispatch(loadBooksFailure("ERROR"))
+      dispatch(loadBooksFailure("An error occurred"))
     })
   }
 }
