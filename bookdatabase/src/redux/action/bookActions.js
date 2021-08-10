@@ -34,7 +34,24 @@ const mockBooks = [
   }
 ]
 
-const loadBooksBegin = () => {
+export const getBooks =() => async dispatch => {
+  try {
+    const res = await axios.get('/books')
+    dispatch({
+      type: ActionTypes.LOAD_BOOKS_BEGIN,
+      payload:res.data
+    })
+  } 
+  catch (err) {
+    dispatch({
+      type: ActionTypes.LOAD_BOOKS_FAILURE,
+      payload: {msg: err.response.statusText, status: err.response.status} 
+    })
+    
+  }
+}
+
+export const loadBooksBegin = () => {
   return {
     type: ActionTypes.LOAD_BOOKS_BEGIN
   }
