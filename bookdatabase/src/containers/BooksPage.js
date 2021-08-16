@@ -1,17 +1,16 @@
 import { connect } from "react-redux";
 import BooksPage from "../components/BooksPage";
-import { loadBooks } from "../redux/action/bookActions";
+import { loadBooks, deleteBook } from "../redux/actions/bookActions";
 
 function mapStateToProps(state) {
   return {
-    loading: state.books.loading,
-    books: state.books.books,
-    error: state.books.error
+    books: state.books,
   };
 }
 
 const dispatchStateToProps = {
   loadBooks,
+  deleteBook,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(BooksPage);

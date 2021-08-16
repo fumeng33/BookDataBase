@@ -39,7 +39,7 @@ function AddBookPage(props) {
   }
 
   function handleFormSubmit(event) {
-    event.preventDefault(); //prevent from page to reload
+    event.preventDefault(); 
 
     props.createBook(book).then(() => history.push("/books"));
   }

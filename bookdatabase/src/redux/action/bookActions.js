@@ -1,107 +1,23 @@
-import * as ActionTypes from "./actionTypes";
+import * as ActionTypes from "./actions/actionTypes";
 import * as bookApi from "../../api/bookApi";
-import axios from "axios";
 
-const mockBooks = [
-  {
-    "id": 1,
-    "Title":"Frankenstein",
-    "Author": "Jamie Lee",
-    "Category": "Romance"
-  },
-  {
-    "id": 2,
-    "Title":"Pride and Prejudice",
-    "Author": "Jane Austle",
-    "Category": "fiction"
-  },
-  {
-    "id": 3,
-    "Title":"The Silent Patient",
-    "Author": "Alex Michaelides",
-    "Category": "Non-fiction"
-  },
-  {
-    "id": 4,
-    "Title":"The Lord of The Rings",
-    "Author": "JRR Tolkier",
-    "Category": "Horror"
-  },
-  {
-    "id": 5,
-    "Title":"On the Green side",
-    "Author": "Suny Wynn",
-    "Category": "Crime"
-  }
-]
 
-// export const getBooks =() => async dispatch => {
-//   try {
-//     const res = await axios.get('/books')
-//     dispatch({
-//       type: ActionTypes.LOAD_BOOKS_BEGIN,
-//       payload:res.data
-//     })
-//   } 
-//   catch (err) {
-//     dispatch({
-//       type: ActionTypes.LOAD_BOOKS_FAILURE,
-//       payload: {msg: err.response.statusText, status: err.response.status} 
-//     })
-    
-//   }
-// }
 
-export const loadBooksBegin = () => {
-  return {
-    type: ActionTypes.LOAD_BOOKS_BEGIN
-  }
+export function loadBooks() {
+  return function (dispatch) {
+    return bookApi
+      .getBooks()
+      .then((booksFromApi) => dispatch(loadBooksSuccess(booksFromApi)))
+      .catch((error) => console.log(error));
+  };
 }
 
-const loadBooksSuccess = (data) => {
+export function loadBooksSuccess(books) {
   return {
     type: ActionTypes.LOAD_BOOKS_SUCCESS,
-    value: data
-  }
+    books,
+  };
 }
-
-const loadBooksFailure = (error) => {
-  return {
-    type: ActionTypes.LOAD_BOOKS_FAILURE,
-    value: error
-  }
-}
-
-export const loadBooks = () => {
-  return dispatch => {
-    dispatch(loadBooksBegin())
-    return axios.get('/books')
-    .then(res => {
-      console.log("RESPONSE:", res.data)
-      dispatch(loadBooksSuccess(res.data))
-    })
-    .catch(error => {
-      console.log("ERROR:", error)
-      dispatch(loadBooksFailure("An error occurred"))
-    })
-  }
-}
-
-// export function loadBooks() {
-//   return function (dispatch) {
-//     return bookApi
-//       .getBooks()
-//       .then((booksFromApi) => dispatch(loadBooksSuccess(booksFromApi)))
-//       .catch((error) => console.log(error));
-//   };
-// }
-
-// export function loadBooksSuccess(books) {
-//   return {
-//     type: ActionTypes.LOAD_BOOKS_SUCCESS,
-//     books,
-//   };
-// }
 
 export function createBook(book) {
   return function (dispatch) {
@@ -114,7 +30,47 @@ export function createBook(book) {
 
 export function createBookSuccess(book) {
   return {
-    type: ActionTypes.CREATE_BOOKS,
+    type: ActionTypes.CREATE_BOOKS_SUCCESS,
     book,
+  };
+}
+
+//is in charge of calling the API
+//using redux-thunk under the hood
+export function deleteBook(bookId) {
+  return function (dispatch) {
+    //connect to the outside - API
+    //start of the API call
+    return (
+      bookApi
+        .deleteBook(bookId)
+        //end of the API call
+        .then(() => dispatch(deleteBookSuccess(bookId))) //when the API call was successful
+        .catch((error) => console.log(error))
+    ); //when the API cal was not successful
+  };
+}
+
+//is in charge of telling the Store that the previous event was successful
+export function deleteBookSuccess(bookId) {
+  return {
+    type: ActionTypes.DELETE_BOOK_SUCCESS,
+    bookId,
+  };
+}
+
+export function updateBook(book) {
+  return function (dispatch) {
+    return bookApi
+      .updateBook(book)
+      .then((updatedBook) => dispatch(updateBookSuccess(updatedBook)))
+      .catch((error) => console.log(error));
+  };
+}
+
+export function updateBookSuccess(updatedBook) {
+  return {
+    type: ActionTypes.UPDATE_BOOK_SUCCESS,
+    updatedBook,
   };
 }

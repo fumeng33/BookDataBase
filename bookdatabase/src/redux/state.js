@@ -1,11 +1,4 @@
-const storeState = {
-  books: {
-    loading: false,
-    error: null,
+export default {
     books: []
-      
-  }
-  
-}
+};
 
-export default storeState;

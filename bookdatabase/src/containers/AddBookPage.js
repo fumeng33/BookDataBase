@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import AddBookPage from "../components/AddBooks";
-import { createBook } from "../redux/action/bookActions";
+import AddBookPage from "../components/AddBookPage";
+import { createBook } from "../redux/actions/bookActions";
 
 const dispatchStateToProps = {
   createBook,

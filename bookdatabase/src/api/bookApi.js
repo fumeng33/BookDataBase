@@ -8,7 +8,7 @@ export function getBooks() {
 
 export function createBook(book) {
   return fetch(bookUrl, {
-    method: "POST", // POST for create
+    method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(book),
   })
@@ -17,8 +17,18 @@ export function createBook(book) {
 }
 
 export function deleteBook(bookId) {
-  //`${bookUrl}/${bookId}` - string interpolation
-  return fetch(bookUrl + bookId, { method: "DELETE" })
+  return fetch(`${bookUrl}/ ${bookId}`, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
+}
+
+export function updateBook(book) {
+  return fetch(`${bookUrl}/ ${bookId}`, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify
+  })
+
+    .then(handleResponse)
+    .catch (handleError);
 }
