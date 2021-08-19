@@ -1,4 +1,4 @@
-export const LOAD_BOOKS = "LOAD_BOOKS";
+export const LOAD_BOOKS = "LOAD_BOOKS"
 export const LOAD_BOOKS_SUCCESS = "LOAD_BOOKS_SUCCESS";
 export const CREATE_BOOKS = "CREATE_BOOKS";
 export const CREATE_BOOKS_SUCCESS = "CREATE_BOOKS_SUCCESS";

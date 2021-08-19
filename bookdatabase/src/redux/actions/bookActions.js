@@ -1,4 +1,4 @@
-import * as ActionTypes from "./actions/actionTypes";
+import * as ActionTypes from "../actions/actionTypes";
 import * as bookApi from "../../api/bookApi";
 
 
