@@ -1,91 +1,86 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   paper: {
     margin: "auto",
+    padding: 50,
     width: 650,
   },
-  row: {
-    "&:hover": {
-      "& $actionButton": {
-        opacity: 1,
-      },
-    },
+  title: {
+    marginBottom: 8,
   },
-  actionButton: {
-    opacity: 0,
+  textField: {
+    display: "block",
+    marginBottom: 20,
+  },
+  button: {
+    marginRight: 20,
   },
 });
 
-function BookPage(props) {
+export default function UpdateBookPage(props) {
   const classes = useStyles();
+  const [book, setBook] = useState(props.book);
 
-  //ComponentDidMount() { }
-  useEffect(() => {
-    if (props.books.length === 0) {
-      props.loadBooks();
-    }
-  }, []);
+  function handleInputChanges(event) {
+    const { name, value } = event.target;
 
-  function handleDeleteBook(bookId) {
-    props.deleteBook(bookId);
+    setBook((previousBook) => ({
+      ...previousBook,
+      [name]: value,
+    }));
   }
 
+  function handleFormSubmit(event) {
+    event.preventDefault(); //prevent from page to reload
+
+    props.updateBook(book).then(() => props.history.push("/books"));
+  }
   return (
-    <TableContainer className={classes.paper} component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.books.map((book) => (
-            <TableRow key={book.id} className={classes.row}>
-              <TableCell>{book.id}</TableCell>
-              <TableCell>{book.title}</TableCell>
-              <TableCell>{book.category}</TableCell>
-              <TableCell>
-                <IconButton
-                  className={classes.actionButton}
-                  color="primary"
-                  aria-label="delete book"
-                  component="span"
-                  onClick={() => handleDeleteBook(book.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton
-                  className={classes.actionButton}
-                  color="primary"
-                  aria-label="update book"
-                  component={Link}
-                  to={`/edit-book/${book.id}`}
-                >
-                  <EditIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper className={classes.paper} elevation={3}>
+      <Typography className={classes.title} variant="h5">
+        Update book
+      </Typography>
+      <form onSubmit={handleFormSubmit}>
+        <TextField
+          required
+          className={classes.textField}
+          fullWidth
+          name="title"
+          label="Title"
+          variant="outlined"
+          value={book.title}
+          onChange={handleInputChanges}
+        />
+        <TextField
+          className={classes.textField}
+          fullWidth
+          name="category"
+          label="Category"
+          variant="outlined"
+          value={book.category}
+          onChange={handleInputChanges}
+        />
+        <div>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            type="submit"
+          >
+            Update
+          </Button>
+          <Button variant="outlined" component={Link} to={"/books"}>
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </Paper>
   );
 }
-
-export default BookPage;

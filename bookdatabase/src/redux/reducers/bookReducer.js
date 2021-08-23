@@ -1,4 +1,3 @@
-
 import * as ActionTypes from "../actions/actionTypes";
 
 export default function bookReducer(state = [], action) {
