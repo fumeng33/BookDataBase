@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Handlee&family=Open+Sans:wght@300;400&display=swap');
+@mixin flex($direction, $align, $justify){
+  display:flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin customOverlay($height, $width, $opacity){
+  position: inherit;
+  background-color: rgba(68, 68, 68, $opacity);
+  height: $height;
+  width: $width;
+}
+
+//Site styles
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  // color: #FCF9F9;
+  button{
+    color: #FCF9F9;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+  }
+  a{
+    color: #FCF9F9;
+  }
+}
+
+.App{
+  background-color: #FCF9F9;
+  color: #FCF9F9;
+}
+
+//Nav Sytles
+.NavBar{
+
+  .nav-list{
+    list-style: none;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    color: #FCF9F9;
+
+    li{
+      margin: auto 20px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+    }
+  }
+}
+
+//Home Page Styles
+.home, .profile{
+  background-color: #FCF9F9;
+}
+
+
+
+//Banner Styles
+.banner{
+  background-size: cover;
+  background-position-y: center;
+  width: 100%;
+  height: 60vh;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.75);
+
+  .overlay{
+    @include customOverlay(60vh, 100%, 0.5)
+  }
+
+  .bannerContents {
+    display: grid;
+    grid-template:
+      'title title . body' 20vh 
+      'title title . body' 40vh / 25% 35% 10% 30%;
+    padding: 0 4em;
+    grid-gap: 0.5em;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    background-size: cover;
+    background-position-y: center;
+    font-family: 'Dela Gothic One', cursive;
+    color: #FCF9F9;
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.62);
+
+    .title{
+      grid-area: title;
+        h1{
+          // grid-area: head;
+          font-size: 8vw;
+        }
+    
+        h4{
+          // grid-area: subHead;
+          font-family: 'Open Sans', sans-serif;
+          font-size: 5vw;
+          align-self: end;
+        }
+    }
+
+    p{
+      grid-area: body;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.5vw;
+      font-weight: 600;
+    }
+  }
+}
+
+//Search Bar Styles
+.searchBar{
+  @include flex(row, center, flex-end);
+  padding: 3vh 5vw;
+  color: #707070;
+
+  .searchInput{
+    padding: 5px 20px;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.17);
+  }
+}
+
+//Gallery Styles
+.gallery {
+  @include flex(row, left, center);
+  flex-wrap: wrap;
+  gap: 1vw;
+  padding-top: 10vh;
+
+
+  li{
+    list-style-type: none;
+  }
+}
+
+
+//Home Thumbnail Styles
+.thumbnail {
+  width: 200px;
+  height: 250px;
+  background-size: cover;
+
+  .overlay{
+    @include customOverlay(250px, 100%, 0.4);
+
+    .details{
+      @include flex(column, right, space-between);
+      padding: 5%;
+      min-height: 95%;
+      font-size: 1em;
+      color: #FCF9F9;
+      text-align: right;
+
+      .topBar{
+        @include flex(row, flex-end, space-between);
+        width: 100%
+      }
+    }
+  }
+}
+
+//User Book List Styles
+.userBookList {
+  @include flex(column, right, space-between);
+  color: #779651;
+  padding-top: 10vh;
+  
+  button{
+    color: #779651;
+  }
+  
+  .userBook{
+    display: grid;
+    padding: 5vh;
+    border: solid black 1px;
+    grid-template: 
+      "common common common common close" 6vh
+      "bookImage title."  20vh
+      "bookImage author" 20vh / 2fr 2fr 2fr 2fr 1fr;
+
+      #common{
+        grid-area: common;
+      }
+      #bookImage{
+        grid-area: bookImage;
+      }
+      #scientific{
+        grid-area: scientific;
+      }
+      #family{
+        grid-area: family;
+      }
+      #water{
+        grid-area: water;
+      }
+      #light{
+        grid-area: light;
+      }
+      #soil{
+        grid-area: soil;
+      }
+      #fertilizer{
+        grid-area: fertilizer;
+      }
+      #save{
+        grid-area: save;
+      }
+      #close{
+        grid-area: close;
+      }
+  }
+  .userBookDetails{
+    display: flex;
+    flex-wrap: initial;
+    justify-content: flex-end;
+  }
+  .image{
+    max-width: 30vw;
+
+    section{
+      padding-left: 3vw;
+    }
+    img{
+      max-width: 50%;
+      max-height: auto;
+    }
+  }
+}
+
+//Dialog Styles
+
+.dialog {
+  text-align: center;
+
+  .header{
+    font-family: 'Dela Gothic One', cursive;
+    color: #779651;
+  }
+
+  .image{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding-left: 3%;
+    min-height: 40vh;
+    width: 40vw;
+    background-size: cover;
+    background-position: center;
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.62);
+    color: #FCF9F9;
+  }
+
+  form {
+    *{
+      color: rgb(68, 68, 68);
+    }
+  }
+  h4{
+    color: rgb(68, 68, 68)
+  }
+
+  p{
+    color: rgb(68, 68, 68)
+  }
+}

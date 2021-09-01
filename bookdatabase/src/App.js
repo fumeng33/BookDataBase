@@ -1,62 +1,32 @@
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Toolbar from "@material-ui/core/Toolbar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Provider as ReduxProvider } from "react-redux";
-
-import store from "./redux/store";
-import BooksPage from "./containers/BooksPage";
-import AddBookPage from "./containers/AddBookPage";
-import UpdateBookPage from "./containers/UpdateBookPage";
-import SignUpPage from "./components/SignUpPage";
-import SignInPage from "./containers/SignInPage";
-
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    justifyContent: "space-between",
-  },
-  appBar: {
-    marginBottom: 16,
-  },
-}));
+import React, {useState} from 'react'
+import './App.css'
+import { BrowserRouter } from 'react-router-dom'
+import { Switch, Route } from 'react-router'
+import Home from './components/Home'
+import Profile from './components/Profile'
+import NavBar from './components/NavBar'
 
 function App() {
-  const classes = useStyles();
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [username, setUsername] = useState()
+  const [userID, setUserID] = useState()
+
+  console.log("App.js Status: ", loggedIn, "User: ", username, "ID", userID)
+
+  const updateStatus = (x) => {
+    setLoggedIn(x)
+    setUserID('')
+    setUsername('')
+  }
 
   return (
-    <ReduxProvider store={store}>
-      <Router>
-        <AppBar className={classes.appBar} position="static">
-          <Toolbar className={classes.root}>
-            <div>
-              <Button color="inherit" component={Link} to={"/books"}>
-                List of Books
-              </Button>
-              <Button color="inherit" component={Link} to={"/add-book"}>
-                Add a new Book
-              </Button>
-            </div>
-            <div>
-              <Button color="inherit" component={Link} to={"/sign-in"}>
-                Sign in
-              </Button>
-              <Button color="inherit" component={Link} to={"/sign-up"}>
-                Sign up
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <Switch>
-          <Route path="/books" component={BooksPage} />
-          <Route path="/add-book" component={AddBookPage} />
-          <Route path="/edit-book/:id" component={UpdateBookPage} />
-          <Route path="/sign-up" component={SignUpPage} />
-          <Route path="/sign-in" component={SignInPage} />
-        </Switch>
-      </Router>
-    </ReduxProvider>
+      <BrowserRouter>
+        <NavBar setUsername={setUsername} updateStatus={updateStatus} setUserID={setUserID} userID={userID} username={username} loggedIn={loggedIn}/>
+          <Switch>
+              <Route exact path="/" render={(props) => <Home loggedIn={loggedIn} userID={userID}/>} />
+              <Route path='/profile' component={Profile} />
+          </Switch>
+      </BrowserRouter>
   );
 }
 
