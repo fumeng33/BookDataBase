@@ -6,10 +6,10 @@ import Login from './Login'
 
 
 const Thumbnail = (props) => {
-  const { Common, book_id, Image } = props.book
+  const { Title, book_id, Image } = props.book
   const [addBook, ConfirmAdd] = useState("+")
 
-  const name = Common.split(',')[0]
+  const name = Title.split(',')[0]
   
   const thumbnailStyle = {
     backgroundImage: `url(${Image})`
@@ -21,7 +21,7 @@ const Thumbnail = (props) => {
       ConfirmAdd(<Login />)
     }
     else{
-      Axios.post('https://backend-capstone-project-js-311.vercel.app/books/users/add', {
+      Axios.post('http://localhost:3001/books/users/add', {
         user_id: props.userID,
         book_id: book_id
       }).then((res) => {
@@ -48,4 +48,4 @@ const Thumbnail = (props) => {
   )
 }
 
-export default Thumbnail
+export default Thumbnail;

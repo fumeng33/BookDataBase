@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { Dialog, DialogContent } from '@material-ui/core';
 
 const CreateUser = () => {
@@ -16,13 +16,14 @@ const CreateUser = () => {
   const register = (e) => {
     e.preventDefault();
     console.log(nameReg, emailReg, passReg)
-    Axios.post('https://backend-capstone-project-js-311.vercel.app/users/register', {
+    axios.post('http://localhost:3001/users/register', {
+    // axios.post('https://backend-capstone-project-js-311.vercel.app/users/register', {
       name: nameReg,
       email: emailReg,
       password: passReg
     }).then((res) => {
       handleToggle()
-      console.log(res)
+      console.log(res.data)
     })
   }
 

@@ -6,10 +6,10 @@
 }
 
 * button {
-  color: #FCF9F9;
+  color: #f5f0f0;
   cursor: pointer;
   background: none;
-  border: none;
+  border: 5x;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
 }
@@ -29,7 +29,7 @@
   display: -ms-flexbox;
   display: flex;
   font-family: 'Open Sans', sans-serif;
-  color: #FCF9F9;
+  color: #e03737;
 }
 
 .NavBar .nav-list li {
@@ -119,14 +119,14 @@
   color: #707070;
 }
 
-.searchBar .searchInput {
+/* .searchBar .searchInput {
   padding: 5px 20px;
   background-color: #FFFFFF;
   border: none;
   border-radius: 5px;
   -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.17);
           box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.17);
-}
+} */
 
 .gallery {
   display: -webkit-box;
@@ -230,7 +230,7 @@
   display: grid;
   padding: 5vh;
   border: solid black 1px;
-  grid-template: "common common common common close" 6vh "bokkImage scientific water light ."  20vh "bookImage family soil fertilizer save" 20vh / 2fr 2fr 2fr 2fr 1fr;
+  grid-template: "title title title title close" 6vh "bookImage author."  20vh "bookImage year" 20vh / 2fr 2fr 2fr 2fr 1fr;
 }
 
 .userBookList .userBook #title {
@@ -290,8 +290,8 @@
 }
 
 .dialog .header {
-  font-family: 'Dela Gothic One', cursive;
-  color: #779651;
+  font-family: 'Roboto';
+  color: #490829;
 }
 
 .dialog .image {

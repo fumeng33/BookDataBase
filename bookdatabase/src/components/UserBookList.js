@@ -10,7 +10,7 @@ const UserBookList = ({setBooks, books, user_id}) => {
 
   const deleteBook = (book_id) => {
     console.log(user_id, book_id)
-    Axios.delete('https://backend-capstone-project-js-311.vercel.app/users/delete', {
+    Axios.delete('http://localhost:3001/users/delete', {
       data: {user_id: user_id,
       book_id: book_id}
     }).then((res) => {
@@ -21,7 +21,7 @@ const UserBookList = ({setBooks, books, user_id}) => {
 
 
   return (
-    <ul className="useBookList">
+    <ul className="userBookList">
       {isHidden ? 
         <button onClick={() => {isHidden ? setHide(false) : setHide(true)}}> Add New Book </button> :
         <AddBook setHide={setHide} isHidden={isHidden}/>
@@ -30,7 +30,7 @@ const UserBookList = ({setBooks, books, user_id}) => {
     {books && books.map((book, idx) => (
         <Card >
           <li className="userBook">
-            <h3 id="common">{book.Common}</h3> 
+            <h3 id="title">{book.Title}</h3> 
              <div className="image" id="bookImage">
                 <img src={book.Image} alt={"Image of " + book.Title}></img>
               </div>

@@ -6,7 +6,7 @@ const Login = (props) => {
   const {setUsername, updateStatus, setUserID} = props
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const [password, setPass] = useState('')
   const [error, setError] = useState('')
 
 
@@ -20,9 +20,9 @@ const Login = (props) => {
 
   const login = (e) => {
     e.preventDefault();
-    Axios.post('https://backend-capstone-project-js-311.vercel.app/users/login', {
+    Axios.post('http://localhost:3001/auth/signin', {
       email: email,
-      password: pass
+      password: password
     }).then((res) => {
 
       if(res.data.message){

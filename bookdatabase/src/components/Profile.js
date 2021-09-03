@@ -6,7 +6,7 @@ const Profile = (props) => {
   const [books, setBooks] = useState([])
   let user_id = props.location.userID
 
-  const url = `https://backend-capstone-project-js-311.vercel.app/users/${props.location.userID}`
+  const url = `http://localhost:3001/users/${props.location.userID}`
 
   useEffect(() => {
     fetch(url)
@@ -19,7 +19,7 @@ const Profile = (props) => {
     return (
         <div className="profile">
           <Banner image="https://res.cloudinary.com/dwuibrt2k/image/upload/v1630450882/bk2_tmk0cl.jpg"
-                  sub="Read Me"
+                  sub="Let's Read"
                   title={props.location.username}
                   body="Welcome to your Library.
                   View and edit your book list here, or add more books to our database"/>

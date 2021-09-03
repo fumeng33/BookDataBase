@@ -4,6 +4,7 @@ import Axios from 'axios'
 const AddBook = (props) => {
   const [newBook, setNewBook] = useState({
     Title: "",
+    // Image: null,
     Author: "",
     Year: "",
     Category: ""
@@ -28,7 +29,7 @@ const AddBook = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(newBook)
-    Axios.post('https://backend-capstone-project-js-311.vercel.app/books/new', {
+    Axios.post('http://localhost:3001/books/new', {
       title: newBook.Title,
       // image: newBook.Image,
       author: newBook.Author,
@@ -95,4 +96,4 @@ const AddBook = (props) => {
   )
 }
 
-export default AddBook
+export default AddBook;

@@ -10,7 +10,7 @@ import CreateUser from './CreateUser'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#779651',
+      main: '#707070',
       contrastText: '#fff'
     }
   },
@@ -26,7 +26,7 @@ const NavBar = (props) => {
         <AppBar  className="NavBar" position="relative">
               <Toolbar>
                   <Typography variant="h6" style={{ flexGrow: "1" }}>
-                    <Link to={{pathname:'/', username: username, userID : userID }}>Seymour</Link>
+                    <Link to={{pathname:'/', username: username, userID : userID }}>Book Database</Link>
                   </Typography>
                   {/* {if(loggedIn === true)} */}
                   {loggedIn === false ? (

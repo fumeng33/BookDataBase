@@ -20,7 +20,7 @@
   text-decoration: none;
   // color: #FCF9F9;
   button{
-    color: #FCF9F9;
+    color: #725f5fcc;
     cursor: pointer;
     background: none;
     border: none;
@@ -156,7 +156,7 @@
       padding: 5%;
       min-height: 95%;
       font-size: 1em;
-      color: #FCF9F9;
+      color: #e9dfdf;
       text-align: right;
 
       .topBar{
@@ -182,33 +182,25 @@
     padding: 5vh;
     border: solid black 1px;
     grid-template: 
-      "common common common common close" 6vh
-      "bookImage title."  20vh
-      "bookImage author" 20vh / 2fr 2fr 2fr 2fr 1fr;
+      "title close" 6vh
+      "author."  20vh
+      "Image year."  20vh
+      "Image category save" 20vh / 2fr 2fr 2fr 2fr 1fr;
 
-      #common{
-        grid-area: common;
+      #title{
+        grid-area: title;
       }
       #bookImage{
         grid-area: bookImage;
       }
-      #scientific{
-        grid-area: scientific;
+      #author{
+        grid-area: author;
       }
-      #family{
-        grid-area: family;
+      #year{
+        grid-area: year;
       }
-      #water{
-        grid-area: water;
-      }
-      #light{
-        grid-area: light;
-      }
-      #soil{
-        grid-area: soil;
-      }
-      #fertilizer{
-        grid-area: fertilizer;
+      #category{
+        grid-area: category;
       }
       #save{
         grid-area: save;
@@ -242,7 +234,7 @@
 
   .header{
     font-family: 'Dela Gothic One', cursive;
-    color: #779651;
+    color: #5f3113;
   }
 
   .image{
