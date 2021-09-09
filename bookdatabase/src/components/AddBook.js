@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -24,88 +23,62 @@ const useStyles = makeStyles({
   },
 });
 
-// function AddBookPage(props) {
-//   const classes = useStyles();
-//   const [book, setBook] = useState({ title: "", category: "" });
+function AddBookPage(props) {
+  const classes = useStyles();
+  // componentDidMount(){
+  //   //call axios get to recieve books array
+  //   axios.post('https://www.googleapis.com/books/v1/volumes?q=funny&key=AIzaSyBEaLMScP9tw-xagW5dHCDOrTXJqli4RHM')
+  //   .then (response => response.date)
+  //   then(data => this.setState({books: data}));
+  // }
 
-//   function handleInputChanges(event) {
-//     const { name, value } = event.target;
+  //render - what get display
+  //JSX
+  //who translate JSX - babel to React elements
 
-//     setBook((previousBook) => ({
-//       ...previousBook,
-//       [name]: value,
-//     }));
-//   }
+  return "Add book";
 
-//   function handleFormSubmit(event) {
-//     event.preventDefault(); //prevent from page to reload
-
-//     props.createBook(book).then(() => props.history.push("/books"));
-//   }
-
-
-
-   function AddBookPage(props) {
-  
-      //state - local storage
-      this.state = { }; // has to be an object 
-    }
-  
-    componentDidMount(){
-      //call axios get to recieve books array
-      axios.post('https://www.googleapis.com/books/v1/volumes?q=funny&key=AIzaSyBEaLMScP9tw-xagW5dHCDOrTXJqli4RHM')
-      .then (response => response.date)
-      then(data => this.setState({books: data}));
-    }
-  
-  
-    //render - what get display 
-    //JSX 
-    //who translate JSX - babel to React elements
-    render() {
-    const{ books } = this.state;
-
-  return (
-    <Paper className={classes.paper} elevation={3}>
-      <Typography className={classes.title} variant="h5">
-        Add a new book
-      </Typography>
-      <form onSubmit={handleFormSubmit}>
-        <TextField
-          required
-          className={classes.textField}
-          fullWidth
-          name="title"
-          label="Title"
-          variant="outlined"
-          value={book.title}
-          onChange={handleInputChanges}
-        />
-        <TextField
-          className={classes.textField}
-          fullWidth
-          name="category"
-          label="Category"
-          variant="outlined"
-          value={book.category}
-          onChange={handleInputChanges}
-        />
-        <div>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            color="primary"
-            type="submit"
-          >
-            Add
-          </Button>
-          <Button variant="outlined" component={Link} to={"/books"}>
-            Cancel
-          </Button>
-        </div>
-      </form>
-    </Paper>
-  );
+  // return (
+  //   <Paper className={classes.paper} elevation={3}>
+  //     <Typography className={classes.title} variant="h5">
+  //       Add a new book
+  //     </Typography>
+  //     <form onSubmit={handleFormSubmit}>
+  //       <TextField
+  //         required
+  //         className={classes.textField}
+  //         fullWidth
+  //         name="title"
+  //         label="Title"
+  //         variant="outlined"
+  //         value={book.title}
+  //         onChange={handleInputChanges}
+  //       />
+  //       <TextField
+  //         className={classes.textField}
+  //         fullWidth
+  //         name="category"
+  //         label="Category"
+  //         variant="outlined"
+  //         value={book.category}
+  //         onChange={handleInputChanges}
+  //       />
+  //       <div>
+  //         <Button
+  //           className={classes.button}
+  //           variant="outlined"
+  //           color="primary"
+  //           type="submit"
+  //         >
+  //           Add
+  //         </Button>
+  //         <Button variant="outlined" component={Link} to={"/books"}>
+  //           Cancel
+  //         </Button>
+  //       </div>
+  //     </form>
+  //   </Paper>
+  // );
 }
 
 export default AddBookPage;

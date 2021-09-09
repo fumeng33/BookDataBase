@@ -1,43 +1,39 @@
-import React, { useState } from 'react';
-import Axios from 'axios';
-import { Button, Dialog, DialogContent } from '@material-ui/core';
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, Dialog, DialogContent } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { storeTokenOnLocalStorage } from "../utils/auth";
 
 const Login = (props) => {
-  const {setUsername, updateStatus, setUserID} = props
+  console.log(props);
+  const history = useHistory();
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState('')
-  const [password, setPass] = useState('')
-  const [error, setError] = useState('')
+  const handleToggle = () => setOpen(!open);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState({ email: "", password: "" });
 
+  function handleInputChanges(event) {
+    const { id, value } = event.target;
 
-  // const updateStatus = (newState) => {
-  //   props.updateStatus(newState)
-  // }
-
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+    setUser((previousUser) => ({
+      ...previousUser,
+      [id]: value,
+    }));
+  }
 
   const login = (e) => {
     e.preventDefault();
-    Axios.post('http://localhost:3001/auth/signin', {
-      email: email,
-      password: password
-    }).then((res) => {
 
-      if(res.data.message){
-        setError(res.data.message)
-      } else {
-        updateStatus(true)
-        setUsername(res.data[0].name)
-        setUserID(res.data[0].id)
-        handleToggle()
-        console.log("success", res.data[0].id)
-      }
-    })
-  }
-
-
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/auth/signin`, user)
+      .then((res) => {
+        setOpen(false);
+        storeTokenOnLocalStorage(res.data.token);
+        props.setIsSignedIn(true);
+        history.push("/bookspage");
+      })
+      .catch(() => setError("Incorrect email or password"));
+  };
 
   return (
     <div>
@@ -45,34 +41,31 @@ const Login = (props) => {
         Login
       </button>
       <Dialog onClose={handleToggle} className="dialog" open={open}>
-          <h1 className='header'>LOGIN</h1> 
+        <h1 className="header">LOGIN</h1>
         <DialogContent dividers>
-        <form className='form'
-          // onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', width: '350px' }}>
-          <p style={{color: "red"}}>{error}</p>
-          <label>Email</label>
-          <input 
-              id="email" 
-              placeholder={email}
-              // value={this.state.mpg} 
-              onChange={(e) => {setEmail(e.target.value)}} 
-              required />
-          <label>Password</label>
-          <input 
-              id="passowrd" 
+          <form
+            onSubmit={login}
+            className="form"
+            style={{ display: "flex", flexDirection: "column", width: "350px" }}
+          >
+            <p style={{ color: "red" }}>{error}</p>
+            <label>Email</label>
+            <input id="email" required onChange={handleInputChanges} />
+            <label>Password</label>
+            <input
+              id="password"
               type="password"
-              // value={this.state.cylinders} 
-              onChange={(e) => {setPass(e.target.value)}} 
-              required />
-          <br />
-          <Button onClick={login} type="submit">Login</Button>
-      </form>
-      {/* <p>{setLoggedIn}</p> */}
+              required
+              onChange={handleInputChanges}
+            />
+            <br />
+            <Button type="submit">Login</Button>
+          </form>
+          {/* <p>{setLoggedIn}</p> */}
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

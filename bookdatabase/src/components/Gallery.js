@@ -1,18 +1,12 @@
-import React from 'react'
-import Thumbnail from './Thumbnail'
+import React from "react";
+import Thumbnail from "./Thumbnail";
 
-
-
-const Gallery = ({books, userID, loggedIn}) => {
-
-
+const Gallery = ({ books }) => {
   return (
     <ul className="gallery">
-      {books && books.map((book, idx) => (
-        <Thumbnail key={idx} book={book} userID={userID} loggedIn={loggedIn}/>
-      ))}
+      {books && books.map((book, idx) => <Thumbnail key={idx} book={book} />)}
     </ul>
-  )
-}
+  );
+};
 
 export default Gallery;
