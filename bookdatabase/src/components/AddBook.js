@@ -1,99 +1,111 @@
-import React, {useState} from 'react'
-import Axios from 'axios'
+import { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
-const AddBook = (props) => {
-  const [newBook, setNewBook] = useState({
-    Title: "",
-    // Image: null,
-    Author: "",
-    Year: "",
-    Category: ""
-  })
+const useStyles = makeStyles({
+  paper: {
+    margin: "auto",
+    padding: 50,
+    width: 650,
+  },
+  title: {
+    marginBottom: 8,
+  },
+  textField: {
+    display: "block",
+    marginBottom: 20,
+  },
+  button: {
+    marginRight: 20,
+  },
+});
+
+// function AddBookPage(props) {
+//   const classes = useStyles();
+//   const [book, setBook] = useState({ title: "", category: "" });
+
+//   function handleInputChanges(event) {
+//     const { name, value } = event.target;
+
+//     setBook((previousBook) => ({
+//       ...previousBook,
+//       [name]: value,
+//     }));
+//   }
+
+//   function handleFormSubmit(event) {
+//     event.preventDefault(); //prevent from page to reload
+
+//     props.createBook(book).then(() => props.history.push("/books"));
+//   }
 
 
 
-  const handleChange = (e) => {
-    console.log(e.target.type)
-    const newState = { ...newBook }
-    if(e.target.type === "file") {
-      newState[e.target.name] = e.target.files[0]
-    } else {
-        newState[e.target.name] = e.target.value
-    }
-    setNewBook(newState)
-    console.log(newBook)
-  };
-
+   function AddBookPage(props) {
   
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(newBook)
-    Axios.post('https://backend-capstone-project-js-311.vercel.app/books/new', {
-      title: newBook.Title,
-      // image: newBook.Image,
-      author: newBook.Author,
-      year: newBook.Year,
-      category: newBook.Category,
-    }).then((res) => {
-      console.log(res)
-    })
-  }
-
-
+      //state - local storage
+      this.state = { }; // has to be an object 
+    }
+  
+    componentDidMount(){
+      //call axios get to recieve books array
+      axios.post('https://www.googleapis.com/books/v1/volumes?q=funny&key=AIzaSyBEaLMScP9tw-xagW5dHCDOrTXJqli4RHM')
+      .then (response => response.date)
+      then(data => this.setState({books: data}));
+    }
+  
+  
+    //render - what get display 
+    //JSX 
+    //who translate JSX - babel to React elements
+    render() {
+    const{ books } = this.state;
 
   return (
-    <li >
-    <form className="userBook" onSubmit={handleSubmit}>
-        <label id="title">Book Title:
-          <input
+    <Paper className={classes.paper} elevation={3}>
+      <Typography className={classes.title} variant="h5">
+        Add a new book
+      </Typography>
+      <form onSubmit={handleFormSubmit}>
+        <TextField
+          required
+          className={classes.textField}
+          fullWidth
           name="title"
-          placeholder="Name of your book"
-          type="text"
-          value={newBook.Title}
-          onChange={handleChange}
-          required />
-        </label > 
-        {/* <label for="image">Image:
-          <input 
-          type="file" 
-          name="Image" 
-          // onChange={(e) => setSelectedImage(e.target.files[0])}
-          onChange={handleChange}
-          required />
-        </label> */}
-        <label id="author"> Author Name:
-          <input
-          name="author"
-          placeholder="Author Name"
-          type="text"
-          value={newBook.Author}
-          onChange={handleChange}
-           />
-        </label> 
-        <label id="year">Year:
-          <input
-          name="Year"
-          placeholder="Year Published"
-          type="text"
-          value={newBook.Year}
-          onChange={handleChange}
-           />
-        </label> 
-        <label id="category">Category:
-          <input
-          name="Category"
-          placeholder="Book Category"
-          type="text"
-          value={newBook.Category}
-          onChange={handleChange}
-          required />
-        </label> 
-          <button id="save" type="submit">Save</button>
-          <button id="close" onClick={() => {props.isHidden ? props.setHide(false) : props.setHide(true)}}>Close</button>  
+          label="Title"
+          variant="outlined"
+          value={book.title}
+          onChange={handleInputChanges}
+        />
+        <TextField
+          className={classes.textField}
+          fullWidth
+          name="category"
+          label="Category"
+          variant="outlined"
+          value={book.category}
+          onChange={handleInputChanges}
+        />
+        <div>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            type="submit"
+          >
+            Add
+          </Button>
+          <Button variant="outlined" component={Link} to={"/books"}>
+            Cancel
+          </Button>
+        </div>
       </form>
-    </li>
-  )
+    </Paper>
+  );
 }
 
-export default AddBook;
+export default AddBookPage;

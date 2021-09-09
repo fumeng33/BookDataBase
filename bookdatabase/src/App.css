@@ -208,7 +208,7 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
+  -webkit-box-direction: center;
       -ms-flex-direction: column;
           flex-direction: column;
   -webkit-box-align: right;
@@ -217,12 +217,15 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  color: #cabf29;
-  padding-top: 10vh;
+  color: #050505;
+  padding-top: 15vh;
 }
 
 .userBookList button {
-  color: #cabf29;
+  color: rgb(241, 236, 236);
+  background-color: rgb(99, 65, 65);
+  /* padding: 5vh; */
+  font-size: 22px;
 }
 
 .userBookList .userBook {

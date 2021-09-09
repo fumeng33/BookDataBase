@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import { Card } from '@material-ui/core'
-import BookDetails from './BookDetails'
 import Axios from 'axios';
 import Login from './Login'
 
@@ -38,7 +37,6 @@ const Thumbnail = (props) => {
           <div className="details">
             <div className="topBar">
               <button><h2 onClick={addBookToProfile}>{addBook}</h2></button>
-              <BookDetails book={props.book}/>
             </div>
             <h4>{name.toUpperCase()}</h4>
           </div>

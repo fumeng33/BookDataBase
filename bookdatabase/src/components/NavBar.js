@@ -46,7 +46,7 @@ const NavBar = (props) => {
                     </li>
                     <li className="nav-list-item">
                       <button color="primary">
-                        <Link to={{pathname:'/profile', username: username, userID : userID}}>My Books</Link>
+                        <Link to={{pathname:'/bookspage', username: username, userID : userID}}>My Books</Link>
                       </button>
                     </li>
                   </ul>

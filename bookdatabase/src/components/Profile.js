@@ -1,6 +1,6 @@
 import React, {useState, useEffect }from 'react'
 import Banner from './Banner'
-import UserBookList from './UserBookList'
+import BooksPage from './BooksPage'
 
 const Profile = (props) => {
   const [books, setBooks] = useState([])
@@ -19,12 +19,11 @@ const Profile = (props) => {
     return (
         <div className="profile">
           <Banner image="https://res.cloudinary.com/dwuibrt2k/image/upload/v1630450882/bk2_tmk0cl.jpg"
-                  sub="Let's Read"
+                  sub="Your book Library"
                   title={props.location.username}
                   body="Welcome to your Library.
                   View and edit your book list here, or add more books to our database"/>
-          {/* <SearchBar placeholder={"Search your books"} books={books}/> */}
-          <UserBookList setBooks={setBooks} books={books} user_id={user_id}/>
+          <BooksPage setBooks={setBooks} books={books} user_id={user_id}/>
         </div>
     )
 }

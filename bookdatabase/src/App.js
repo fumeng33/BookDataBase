@@ -3,8 +3,12 @@ import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router'
 import Home from './components/Home'
-import Profile from './components/Profile'
+import BooksPage from './components/BooksPage'
 import NavBar from './components/NavBar'
+import AddBook from './components/AddBook'
+import Profile from './components/Profile'
+
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -25,6 +29,11 @@ function App() {
           <Switch>
               <Route exact path="/" render={(props) => <Home loggedIn={loggedIn} userID={userID}/>} />
               <Route path='/profile' component={Profile} />
+              <Route path='/addbook' component={AddBook} />
+              <Route path='/bookspage' component={BooksPage} />
+
+
+
           </Switch>
       </BrowserRouter>
   );
